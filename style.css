@@ -1,0 +1,91 @@
+@font-face{
+    font-family: PoppinsRegular;
+    src: url("./assets/fonts/Poppins-Regular.ttf");
+}
+@font-face{
+    font-family: PoppinsMedium;
+    src: url("./assets/fonts/Poppins-Medium.ttf");
+}
+@font-face{
+    font-family: PoppinsBold;
+    src: url("./assets/fonts/Poppins-Bold.ttf");
+}
+html, body{
+    padding: 0;
+    margin: 0;
+    font-family: PoppinsRegular, Helvetica, sans-serif;
+    background-color: #f9f9fc;
+    color: #757575;
+}
+.container{
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+a{
+    color: #757575;
+    text-decoration: none;
+}
+.center{justify-content: center;}
+.space-between{justify-content: space-between;}
+.space-around{justify-content: space-around;}
+nav{
+    height: 80px;
+    background-color: #ffffff;
+    font-size: 13px;
+    font-family: PoppinsMedium;
+    box-shadow: 0 1px 50px 0 #C5CAE9;
+}
+#nav-kiri, #menu, #nav-kanan{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.menu-item{
+    padding: 10px 10px;
+}
+#menu a:hover{
+    color: #303F9F;
+}
+.selected{
+    background-color: #C5CAE9;
+    color: #303F9F;
+    border-radius: 5px;
+}
+#logo-kelas{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+#nav-kanan{font-family: PoppinsMedium;}
+#profil{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 15px;
+    position: relative;
+    cursor: pointer;
+}
+#nama{cursor: pointer;}
+#logo-kelas img, #profil img{
+    width: 50px;
+    height: 50px;
+}
+#dropdown-nav-kanan{
+    position: absolute;
+    display: block;
+    background-color: #ffffff;
+    padding: 10px;
+    top: 80px;
+    width: 150px;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 15px 1px #C5CAE9;
+    display: none;
+}
+#dropdown-nav-kanan a:hover, #nama:hover{color: #303F9F;}
+.dropdown-nav-kanan-item{line-height: 40px;}
