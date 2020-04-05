@@ -10,9 +10,11 @@
     font-family: PoppinsBold;
     src: url("./assets/fonts/Poppins-Bold.ttf");
 }
-html, body{
+*{
     padding: 0;
     margin: 0;
+}
+html, body{
     font-family: PoppinsRegular, Helvetica, sans-serif;
     background-color: #f9f9fc;
     color: #757575;
@@ -37,6 +39,10 @@ nav{
     font-size: 13px;
     font-family: PoppinsMedium;
     box-shadow: 0 1px 50px 0 #C5CAE9;
+    /* margin-bottom: 50px; */
+    position: fixed;
+    width: 100%;
+    z-index: 999;
 }
 #nav-kiri, #menu, #nav-kanan{
     display: flex;
@@ -89,3 +95,170 @@ nav{
 }
 #dropdown-nav-kanan a:hover, #nama:hover{color: #303F9F;}
 .dropdown-nav-kanan-item{line-height: 40px;}
+#sidebar-kiri{
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    /* margin-right: 50px; */
+    position: fixed;
+    top: 130px;
+}
+#ucapan{
+    background-color: #3F51B5;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
+    padding: 20px;
+    color: #ffffff;
+    font-family: PoppinsRegular;
+    margin-bottom: 20px;
+}
+#ucapan-orang{
+    font-family: PoppinsMedium;
+    margin-bottom: 20px;
+    text-align: center;
+}
+#status-absen{
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.sudah-absen{
+    background-color: #5eccd6;
+    padding: 5px;
+    border-radius: 5px;
+}
+.belum-absen{
+    background-color: #ffb822;
+    padding: 5px;
+    border-radius: 5px;
+}
+#data-diri{
+    font-size: 13px;
+}
+.data-diri-header{
+    color: #C5CAE9;
+    font-family: PoppinsBold;
+}
+#status-kelas{
+    background-color: #ffb822;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
+    padding: 20px;
+    font-family: PoppinsRegular;
+    color: #000000;
+}
+#jumlah-orang{
+    font-size: 26px;
+    font-family: PoppinsBold;
+}
+#siapa-aja{
+    width: 100%;
+    font-family: PoppinsMedium;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 10px 0;
+    background-color: #ffb822;
+    color: #212121;
+    border: 1px solid #fff8e8;
+}
+#siapa-aja:hover{
+    background-color: #fff8e8;
+    color: #ffb822;
+    border: 1px solid #ffb822;
+}
+#postingan-utama{
+    width: 560px;
+    display: flex;
+    flex-direction: column;
+    /* margin-right: 50px; */
+    top: 130px;
+    left: 330px;
+    position: relative;
+}
+.postingan-item{
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
+    padding: 20px;
+    font-family: PoppinsRegular;
+    color: #212121;
+    margin-bottom: 20px;
+}
+.yang-post{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.foto-ts{
+    margin-right: 10px;
+}
+.foto-ts img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.nama-ts{
+    font-family: PoppinsBold;
+    font-size: 14px;
+}
+.waktu-post{
+    font-size: 12px;
+    color: #757575;
+}
+.isi-post{
+    margin-bottom: 10px;
+}
+.materi-item{
+    background-color: #C5CAE9;
+    color: #303F9F;
+    font-size: 13px;
+    font-family: PoppinsMedium;
+    border-radius: 5px;
+    padding: 10px;
+}
+#sidebar-kanan{
+    width: 330px;
+    position: fixed;
+    top: 130px;
+    left: 973.7px;
+}
+#waktu{
+    background-color: #7C4DFF;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
+    padding: 20px;
+    font-family: PoppinsRegular;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+#jam{
+    border-bottom: 1px solid #BDBDBD;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+.judul-acara{
+    font-family: PoppinsBold;
+    font-size: 14px;
+}
+.detail-acara{
+    font-size: 12px;
+    color: #C5CAE9;
+}
+.acara-kiri{
+    margin-right: 10px;
+}
+.acara-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+footer{
+    color: #757575;
+    font-size: 12px;
+    font-family: PoppinsBold;
+    padding: 10px 0;
+    text-align: center;
+}
