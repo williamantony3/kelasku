@@ -262,3 +262,83 @@ footer{
     padding: 10px 0;
     text-align: center;
 }
+#login-page{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#login-page-kiri{
+    padding: 50px;
+    width: 40vw;
+    height: 100vh;
+    background: url("assets/images/bg-login.jpg");
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+#login-page-kiri img{
+    width: 80px;
+    height: 80px;
+}
+#login-page-kiri h3{
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+#login-page-kiri table{
+    color: #ffffff;
+}
+#login-page-kanan{
+    width: 60vw;
+    height: 100vh;
+    padding: 100px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+#login-page-kanan h2{
+    margin-bottom: 50px;
+    margin-top: 80px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+tr{
+    /* border: 1px solid #ffffff; */
+}
+td, th{
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #cccccc;
+}
+th{
+    font-family: PoppinsBold;
+}
+input{
+    width: 100%;
+    background-color: #f9f9fb;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 20px;
+    outline: none;
+    font-family: PoppinsRegular;
+}
+.grup-input{
+    margin-bottom: 20px;
+}
+button{
+    color: #ffffff;
+    background-color: #3F51B5;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-family: PoppinsRegular;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    box-shadow: 5px 5px 20px 1px #3F51B5;
+}
+button:hover{
+    background-color: #303F9F;
+}
