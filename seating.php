@@ -37,30 +37,78 @@
         </div>
     </nav>
     <div class="container">
-        <div id="postingan-utama">
-            <div class="postingan-item">
-                <div class="yang-post">
-                    <div class="foto-ts">
-                        <img src="./assets/images/account.png" alt="" srcset="">
-                    </div>
-                    <div class="yang-post-kanan">
-                        <div class="nama-ts">
-                            William Antony
-                        </div>
-                        <div class="waktu-post">
-                            17:09, 4 April 2020
-                        </div>
-                    </div>
-                </div>
-                <div class="isi-post">
-                    Gais ada materi baru nih gais!
-                </div>
-                <a href=""><div class="materi-item"><i class="fas fa-file"></i> Materi.pdf</div></a>
+        <section>
+            <div class="kotak">
+                <h1>Posisi Tempat Duduk di Kelas</h1>
+                <!-- Baris 1 -->
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="kosong"></div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <!-- Baris 2 -->
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="kosong"></div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <!-- Baris 3 -->
+                <div class="kosong"></div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="kosong"></div>
+                <div class="kosong"></div>
+                <div class="kosong"></div>
+                <div class="kosong"></div>
+                <div class="kosong"></div>
+                <!-- Baris 4 -->
+                <div class="kosong"></div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="kosong"></div>
+                <div class="kosong"></div>
+                <div class="kosong"></div>
+                <div class="kosong"></div>
+                <div class="kosong"></div>
+                <!-- Baris 5 -->
+                <div class="kosong"></div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
+                <div class="duduk">tes</div>
             </div>
-            
             <footer>
-                    2020 &copy; CIH!
+                2020 &copy; CIH!
             </footer>
-        </div>
+        </section>
     </div>
 <?php include "footer.php"; ?>

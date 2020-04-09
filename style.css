@@ -346,3 +346,37 @@ button{
 button:hover{
     background-color: #303F9F;
 }
+section{
+    top: 130px;
+    position: relative;
+    width: 100%;
+}
+.kotak{
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
+    padding: 20px;
+    font-family: PoppinsRegular;
+    color: #212121;
+}
+.kotak h1{
+    text-align: center;
+}
+.duduk{
+    width: 90px;
+    height: 50px;
+    background-color: #7C4DFF;
+    margin: 1px;
+    display: inline-block;
+    box-sizing: border-box;
+    line-height: 50px;
+    color: #ffffff;
+    text-align: center;
+}
+.kosong{
+    width: 90px;
+    height: 50px;
+    background-color: #ffffff;
+    margin: 1px;
+    display: inline-block;
+}
