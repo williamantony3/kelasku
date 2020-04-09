@@ -298,6 +298,10 @@ footer{
 #login-page-kanan h2{
     margin-bottom: 50px;
     margin-top: 80px;
+    text-align: center;
+}
+#login-page-kanan .grup-input{
+    text-align: center;
 }
 table{
     width: 100%;

@@ -1,3 +1,21 @@
+<?php
+    include "config.php";
+    if(isset($_SESSION['NIM'])){
+        header("Location: index.php");
+    }
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $username = $_POST['username'];
+        $password = md5($_POST['password']);
+        $query = mysqli_query($conn, "SELECT * FROM user WHERE Username='$username' AND Password='$password'");
+        if(mysqli_num_rows($query) == 1){
+            $user = mysqli_fetch_assoc($query);
+            $_SESSION['NIM'] = $user['NIM'];
+            header("Location: index.php");
+        }else{
+            echo "salah";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,10 +66,10 @@
             <h2>Masuk Kelasku</h2>
             <form action="" method="post">
                 <div class="grup-input">
-                    <input type="text" name="username" id="" required="required" placeholder="Nama Pengguna">
+                    <input type="text" name="username" required="required" placeholder="Nama Pengguna">
                 </div>
                 <div class="grup-input">
-                    <input type="password" name="password" id="" required="required" placeholder="Kata Sandi">
+                    <input type="password" name="password" required="required" placeholder="Kata Sandi">
                 </div>
                 <div class="grup-input">
                     <button type="submit">Masuk</button>
