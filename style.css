@@ -259,7 +259,7 @@ footer{
     color: #757575;
     font-size: 12px;
     font-family: PoppinsBold;
-    padding: 10px 0;
+    padding: 20px 0;
     text-align: center;
 }
 #login-page{
@@ -338,7 +338,7 @@ button{
     padding: 15px 30px;
     border: none;
     border-radius: 5px;
-    font-family: PoppinsRegular;
+    font-family: PoppinsMedium;
     cursor: pointer;
     transition: 0.2s ease-in-out;
     box-shadow: 5px 5px 20px 1px #3F51B5;
@@ -351,16 +351,54 @@ section{
     position: relative;
     width: 100%;
 }
-.kotak{
+.kotak, #konfirmasi-box{
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
-    padding: 20px;
+    padding: 40px;
     font-family: PoppinsRegular;
     color: #212121;
+    display: flex;
+    flex-wrap: wrap;
 }
-.kotak h1{
+#konfirmasi{
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+#konfirmasi-box{
+    top: 100px;
+    position: absolute;
+    left: 420px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 400px;
+}
+#konfirmasi-logo{
+    font-size: 48px;
+    color: #303F9F;
     text-align: center;
+}
+#konfirmasi-button{
+    display: flex;
+    justify-content: space-between;
+}
+#konfirmasi-pesan{
+    padding: 30px 0;
+    text-align: center;
+}
+#tempatduduk{
+    display: flex;
+    flex-wrap: wrap;
+    /* margin-top: 10px; */
+}
+.judul-section{
+    margin-bottom: 20px;
 }
 .duduk{
     width: 90px;
@@ -372,6 +410,14 @@ section{
     line-height: 50px;
     color: #ffffff;
     text-align: center;
+    font-size: 12px; 
+}
+.cancel{
+    background-color: #757575;
+    box-shadow: 5px 5px 20px 1px #757575;
+}
+.cancel:hover{
+    background-color: #BDBDBD;
 }
 .kosong{
     width: 90px;
@@ -379,4 +425,9 @@ section{
     background-color: #ffffff;
     margin: 1px;
     display: inline-block;
+}
+.judul-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

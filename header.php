@@ -7,7 +7,10 @@
     <link rel="shortcut icon" href="./assets/images/icon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/fontawesome-free-5.12.1-web/css/all.css">
+    <!-- <link rel="stylesheet" href="./assets/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="./assets/bootstrap-4.4.1-dist/css/bootstrap.min.css"> -->
     <script src="./assets/scripts/jquery-3.4.1.min.js"></script>
+    <!-- <script src="./assets/scripts/jquery-ui.js"></script> -->
     <script>
         function startTime() {
             var today = new Date();

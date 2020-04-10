@@ -16,17 +16,17 @@
                 </div>
                 <div id="menu">
                     <a href="index.php"><div class="menu-item selected"><i class="fas fa-home"></i> Beranda</div></a>
-                    <a href="index.php"><div class="menu-item"><i class="fas fa-edit"></i> Kumpul Tugas</div></a>
-                    <a href="index.php"><div class="menu-item"><i class="fas fa-book"></i> Materi Kuliah</div></a>
+                    <a href="turn-in.php"><div class="menu-item"><i class="fas fa-edit"></i> Kumpul Tugas</div></a>
+                    <a href="materials.php"><div class="menu-item"><i class="fas fa-book"></i> Materi Kuliah</div></a>
                     <a href="seating.php"><div class="menu-item"><i class="fas fa-chair"></i> Cek Kursi</div></a>
-                    <a href="index.php"><div class="menu-item"><i class="fas fa-calendar"></i> Acara Kelas</div></a>
+                    <a href="events.php"><div class="menu-item"><i class="fas fa-calendar"></i> Acara Kelas</div></a>
                 </div>
             </div>
             <div id="nav-kanan">
                 <div id="nama">
                     <?php echo $user['Name']; ?>
                     <div id="dropdown-nav-kanan">
-                        <a href="index.php"><div class="dropdown-nav-kanan-item"><i class="fas fa-user"></i> Ubah Profil</div></a>
+                        <a href="profile.php"><div class="dropdown-nav-kanan-item"><i class="fas fa-user"></i> Ubah Profil</div></a>
                         <a href="logout.php"><div class="dropdown-nav-kanan-item"><i class="fas fa-sign-out-alt"></i> Keluar</div></a>
                     </div>
                 </div>

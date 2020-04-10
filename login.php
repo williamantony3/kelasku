@@ -10,6 +10,7 @@
         if(mysqli_num_rows($query) == 1){
             $user = mysqli_fetch_assoc($query);
             $_SESSION['NIM'] = $user['NIM'];
+            $_SESSION['Role'] = $user['Role'];
             header("Location: index.php");
         }else{
             echo "salah";

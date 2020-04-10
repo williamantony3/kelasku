@@ -5,6 +5,13 @@ $(document).ready(function(){
     $("#profil").click(function(){
         $("#dropdown-nav-kanan").toggle();
     });
+    $(".konfirmasi-box").click(function(){
+        $("#konfirmasi").show("slow");
+    });
+    $(".cancel").click(function(){
+        $("#konfirmasi").hide("show");
+    });
+
 });
 var d = new Date();
 var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
