@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/fontawesome-free-5.12.1-web/css/all.css">
     <script src="./assets/scripts/jquery-3.4.1.min.js"></script>
+    <script src="get_absen_data.js"></script>
 </head>
 <body>
     <div id="login-page">
@@ -39,27 +40,8 @@
                         <th>NAMA</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Harry Wijaya</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Kelvin Chandra</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Verina Armelia</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Vincent Gunawan</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>William Antony</td>
-                    </tr>
+                <tbody id="div_absen">
+
                 </tbody>
             </table>
         </div>

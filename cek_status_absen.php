@@ -13,7 +13,7 @@
     //  $conn = mysqli_connect($host, $user, $pass, $dbName);
     //  $result = mysqli_query($conn, "SELECT * FROM absendetail A JOIN user U WHERE  DATE(`Date`) = CURDATE()  AND A.NIM=U.NIM AND AbsenTime IS NULL");
     //  $result2 = mysqli_query($conn, "SELECT * FROM absendetail A JOIN user U WHERE DATE(`Date`) = CURDATE()  AND A.NIM=U.NIM AND AbsenTime > '08:00:00'");
-     $semua = mysqli_query($conn, "SELECT * FROM user ORDER BY Name ASC");
+    //  $semua = mysqli_query($conn, "SELECT * FROM user ORDER BY Name ASC");
      
     //  if(mysqli_num_rows($result)>0){
         // $output .= '<h4>Yang Belum Absen</h4>';
@@ -25,18 +25,17 @@
         //                        </tr>
         //                    </table>
         //                </div>';
-        $i = 1;
-        while($row = mysqli_fetch_array($semua)){
+        // $i = 0;
+        // while($row = mysqli_fetch_array($semua)){
             // echo '<p>'.$row["NIM"].'</p>';
-            $nim = $row['NIM'];
+            $nim = $_SESSION['NIM'];
             $cari = mysqli_query($conn, "SELECT * FROM absendetail WHERE NIM='$nim' AND Date = CURDATE()");
             if(mysqli_num_rows($cari) == 0){
-                $output .= '<tr>
-                                <td>'.$i++.'</td>
-                                <td>'.$row['Name'].'</td>
-                            </tr>';
+                $output = "<span class='belum-absen'>Belum Absen</span>";
+            }else{
+                $output = "<span class='sudah-absen'>Sudah Absen</span>";
             }
-        };
+        // };
         echo $output;
     // }
     // if(mysqli_num_rows($result2)>0){

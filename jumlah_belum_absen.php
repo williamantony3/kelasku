@@ -25,18 +25,16 @@
         //                        </tr>
         //                    </table>
         //                </div>';
-        $i = 1;
+        $i = 0;
         while($row = mysqli_fetch_array($semua)){
             // echo '<p>'.$row["NIM"].'</p>';
             $nim = $row['NIM'];
             $cari = mysqli_query($conn, "SELECT * FROM absendetail WHERE NIM='$nim' AND Date = CURDATE()");
             if(mysqli_num_rows($cari) == 0){
-                $output .= '<tr>
-                                <td>'.$i++.'</td>
-                                <td>'.$row['Name'].'</td>
-                            </tr>';
+                ++$i;
             }
         };
+        $output = $i;
         echo $output;
     // }
     // if(mysqli_num_rows($result2)>0){

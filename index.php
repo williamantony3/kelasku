@@ -43,7 +43,6 @@
                     Halo, <?php echo $user['Name']; ?>!
                 </div>
                 <div id="status-absen">
-                    <span class="belum-absen">Belum Absen</span>
                 </div>
                 <div id="data-diri">
                     <div class="data-diri-header">NIM</div>
@@ -54,10 +53,10 @@
             </div>
             <div id="status-kelas">
                 <div id="jumlah-orang">
-                    3
+                    0
                 </div>
-                temanmu belum absen
-                <a href="index.php"><div id="siapa-aja"><i class="fas fa-eye"></i> Siapa tuh?</div></a>
+                mahasiswa belum absen
+                <a href="presence_list.php"><div id="siapa-aja"><i class="fas fa-eye"></i> Siapa tuh?</div></a>
             </div>
         </div>
         <div id="postingan-utama">
@@ -120,4 +119,13 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            // console.log("jquery masuk");
+            setInterval(function(){
+                $('#jumlah-orang').load("jumlah_belum_absen.php").fadeIn("slow");
+                $('#status-absen').load("cek_status_absen.php").fadeIn("slow");
+            }, 1000);
+        });
+    </script>
 <?php include "footer.php"; ?>
