@@ -32,7 +32,7 @@
 <body>
     <div id="login-page">
         <div id="login-page-kiri">
-            <h3>Yang Masih Belum Absen</h3>
+            <h3>Yang Masih Belum Absen Hari Ini</h3>
             <table>
                 <thead>
                     <tr>

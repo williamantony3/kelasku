@@ -7,9 +7,10 @@ $(document).ready(function(){
     });
     $(".konfirmasi-box").click(function(){
         $("#konfirmasi").show("slow");
+        // console.log("tes");
     });
     $(".cancel").click(function(){
-        $("#konfirmasi").hide("show");
+        $("#konfirmasi").hide("slow");
     });
 
 });

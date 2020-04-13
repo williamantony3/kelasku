@@ -55,7 +55,7 @@
                 <div id="jumlah-orang">
                     0
                 </div>
-                mahasiswa belum absen
+                mahasiswa belum absen hari ini
                 <a href="presence_list.php"><div id="siapa-aja"><i class="fas fa-eye"></i> Siapa tuh?</div></a>
             </div>
         </div>
@@ -123,8 +123,8 @@
         $(document).ready(function(){
             // console.log("jquery masuk");
             setInterval(function(){
-                $('#jumlah-orang').load("jumlah_belum_absen.php").fadeIn("slow");
-                $('#status-absen').load("cek_status_absen.php").fadeIn("slow");
+                $('#jumlah-orang').load("get_jumlah_belum_absen_data.php").fadeIn("slow");
+                $('#status-absen').load("get_status_absen_data.php").fadeIn("slow");
             }, 1000);
         });
     </script>
