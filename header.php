@@ -10,6 +10,8 @@
     <!-- <link rel="stylesheet" href="./assets/jquery-ui.css"> -->
     <!-- <link rel="stylesheet" href="./assets/bootstrap-4.4.1-dist/css/bootstrap.min.css"> -->
     <script src="./assets/scripts/jquery-3.4.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="./assets/dropzone/dropzone.css"> -->
+    <!-- <script src="./assets/dropzone/dropzone.js"></script> -->
     <!-- <script src="./assets/scripts/jquery-ui.js"></script> -->
     <script>
         function startTime() {

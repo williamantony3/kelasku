@@ -6,6 +6,7 @@
     $nim = $_SESSION['NIM'];
     $queryUser = mysqli_query($conn, "SELECT * FROM user WHERE NIM='$nim'");
     $user = mysqli_fetch_assoc($queryUser);
+    $queryPost = mysqli_query($conn, "SELECT * FROM post INNER JOIN user ON post.NIM = user.NIM ORDER BY ID DESC");
     include "header.php"; 
 ?>
     <nav>
@@ -60,6 +61,11 @@
             </div>
         </div>
         <div id="postingan-utama">
+            <?php while($rowPost = mysqli_fetch_assoc($queryPost)){
+                if(!file_exists($rowPost['Content'])){
+                    continue;
+                }
+            ?>
             <div class="postingan-item">
                 <div class="yang-post">
                     <div class="foto-ts">
@@ -67,19 +73,19 @@
                     </div>
                     <div class="yang-post-kanan">
                         <div class="nama-ts">
-                            William Antony
+                            <?php echo $rowPost['Name']; ?>
                         </div>
                         <div class="waktu-post">
-                            17:09, 4 April 2020
+                            <?php echo $rowPost['Time']; ?>
                         </div>
                     </div>
                 </div>
                 <div class="isi-post">
-                    Gais ada materi baru nih gais!
+                    <?php echo $rowPost['Message']; ?>
                 </div>
-                <a href=""><div class="materi-item"><i class="fas fa-file"></i> Materi.pdf</div></a>
+                <a href="<?php echo $rowPost['Content']; ?>"><div class="materi-item"><i class="fas fa-file"></i> <?php echo $rowPost['Content']; ?></div></a>
             </div>
-            
+            <?php } ?>
             <footer>
                     2020 &copy; CIH!
             </footer>

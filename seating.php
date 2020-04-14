@@ -71,7 +71,7 @@
             <div class="judul-section">
                 <h1>Posisi Tempat Duduk di Kelas</h1>
                 <?php if($_SESSION['Role'] == 1){ ?>
-                <button class="konfirmasi-box"><i class="fas fa-retweet"></i> ACAK</button>
+                <button class="konfirmasi-box"><i class="fas fa-retweet"></i> Acak Kursi</button>
                 <?php } ?>
             </div>
             <div class="kotak">

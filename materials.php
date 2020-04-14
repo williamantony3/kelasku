@@ -62,6 +62,7 @@
             </div>
             <div id="konfirmasi-button">
                 <button class="delete">Ya</button>
+                <button class="remove_file">Ya</button>
                 <button class="cancel">Tidak</button>
             </div>
         </div>
@@ -70,6 +71,10 @@
         <section>
             <div class="judul-section">
                 <h1>Materi Kuliah</h1>
+                <?php if($_SESSION['Role'] == 1){ ?>
+                <button id='create_folder'><i class="fas fa-folder-plus"></i> Buat Folder</button>
+                <?php } ?>
+                <button id="up"><i class="fas fa-angle-left"></i> Kembali</button>
             </div>
             <div class="kotak">
             </div>  

@@ -319,7 +319,7 @@ td, th{
 th{
     font-family: PoppinsBold;
 }
-input{
+input, textarea{
     width: 100%;
     background-color: #f9f9fb;
     height: 30px;
@@ -329,8 +329,15 @@ input{
     outline: none;
     font-family: PoppinsRegular;
 }
+textarea{
+    height: 100px;
+    padding: 20px;
+}
 .grup-input{
     margin-bottom: 20px;
+}
+.kotak input, .kotak textarea{
+    width: 90%;
 }
 button{
     color: #ffffff;
@@ -360,6 +367,9 @@ section{
     color: #212121;
     display: flex;
     flex-wrap: wrap;
+}
+.kotak{
+    flex-direction: column;
 }
 #konfirmasi{
     position: absolute;
@@ -434,4 +444,7 @@ section{
 table button{
     box-shadow: none;
     padding: 5px 10px;
+}
+.delete, .remove{
+    display: none;
 }
