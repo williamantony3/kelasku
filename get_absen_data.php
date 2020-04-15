@@ -1,6 +1,6 @@
 <!-- absen_data.php -->
 <?php
-    include "config.php";
+    require_once "config.php";
     //  $host = "localhost";
     //  $user = "root";
     //  $pass = "";

@@ -1,5 +1,6 @@
 <?php
-include "config.php";
+session_start();
+require_once "config.php";
 if($_FILES['upload_file']['name'] != ""){
     $data = explode(".", $_FILES['upload_file']['name']);
     $extension = $data[1];

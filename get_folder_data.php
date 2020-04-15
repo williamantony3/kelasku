@@ -1,5 +1,6 @@
 <?php
-include "config.php";
+session_start();
+require_once "config.php";
 function format_folder_size($size){
     if($size >= 1073741824){
         $size = number_format($size / 1073741824, 2) . " GB";
