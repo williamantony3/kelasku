@@ -337,7 +337,7 @@ textarea{
     margin-bottom: 20px;
 }
 .kotak input, .kotak textarea{
-    width: 90%;
+    width: 30%;
 }
 button{
     color: #ffffff;

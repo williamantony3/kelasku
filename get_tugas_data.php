@@ -33,7 +33,7 @@ function get_folder_size($folder_name){
 if(isset($_POST['action'])){
     if($_POST['action'] == "fetch"){
         // $sorted = array();
-        $file_data = scandir("materials/");
+        $file_data = scandir("assignments/");
         natcasesort($file_data);
         // $file_data = array_filter("materials/".$file_data, 'is_dir');
         // $output = "<button id='create_folder'>Folder Baru</button>";
@@ -41,7 +41,7 @@ if(isset($_POST['action'])){
             $output = "
                 <table class='table table-bordered table-striped'>
                     <tr>
-                        <th>Nama Folder / Berkas</th>
+                        <th>Tugas</th>
                         <th colspan='3' width='30%'>Aksi</th>
                     </tr>
             ";
@@ -81,23 +81,45 @@ if(isset($_POST['action'])){
                     //     ");
                     // }
                     if($_SESSION['Role'] == 1){
-                        $output .= "
-                        <tr>
-                            <td><i class='fas fa-folder'></i> ".$file."</td>
-                            <!--<td><button name='update' data-name='".$file."' class='update'><i class='fas fa-edit'></i> Ubah Nama</button></td>-->
-                            <td><button name='delete' data-name='".$file."' class='konfirmasi-box'><i class='fas fa-trash'></i> Hapus</button></td>
-                            <td><button name='upload' data-name='".$file."' class='upload'><i class='fas fa-upload'></i> Unggah</button></td>
-                            <td><button name='view_files' data-name='".$file."' class='view_files'><i class='fas fa-eye'></i> Lihat</button></td>
-                        </tr>
-                        ";
+                            if(!file_exists("assignments/".$file."/".$_SESSION['NIM'].".zip")){
+                                $output .= "
+                                <tr>
+                                    <td><i class='fas fa-folder'></i> ".$file."</td>
+                                    <!--<td><button name='update' data-name='".$file."' class='update'><i class='fas fa-edit'></i> Ubah Nama</button></td>-->
+                                    <td><button name='upload' data-name='".$file."' class='upload'><i class='fas fa-upload'></i> Kumpul</button></td>
+                                    <td><button name='delete' data-name='".$file."' class='konfirmasi-box'><i class='fas fa-trash'></i> Hapus</button></td>
+                                    <td><button name='view_files' data-name='".$file."' class='view_files'><i class='fas fa-eye'></i> Lihat</button></td>
+                                </tr>
+                                ";
+                            }else{
+                                $output .= "
+                                <tr>
+                                    <td><i class='fas fa-folder'></i> ".$file."</td>
+                                    <td><span class='sudah-absen' style='color:white;'><i class='fas fa-check'></i> Sudah Kumpul</span></td>
+                                    <!--<td><button name='update' data-name='".$file."' class='update'><i class='fas fa-edit'></i> Ubah Nama</button></td>-->
+                                    <td><button name='delete' data-name='".$file."' class='konfirmasi-box'><i class='fas fa-trash'></i> Hapus</button></td>
+                                    <td><button name='view_files' data-name='".$file."' class='view_files'><i class='fas fa-eye'></i> Lihat</button></td>
+                                </tr>
+                                ";
+                            }
                     }else{
-                        $output .= "
-                        <tr>
-                            <td><i class='fas fa-folder'></i> ".$file."</td>
-                            <td><button name='upload' data-name='".$file."' class='upload'><i class='fas fa-upload'></i> Unggah</button></td>
-                            <td><button name='view_files' data-name='".$file."' class='view_files'><i class='fas fa-eye'></i> Lihat</button></td>
-                        </tr>
-                        ";
+                        if(!file_exists("assignments/".$file."/".$_SESSION['NIM'].".zip")){
+                            $output .= "
+                            <tr>
+                                <td><i class='fas fa-folder'></i> ".$file."</td>
+                                <td><button name='upload' data-name='".$file."' class='upload'><i class='fas fa-upload'></i> Kumpul</button></td>
+                                <td><button name='view_files' data-name='".$file."' class='view_files'><i class='fas fa-eye'></i> Lihat</button></td>
+                            </tr>
+                            ";
+                        }else{
+                            $output .= "
+                            <tr>
+                                <td><i class='fas fa-folder'></i> ".$file."</td>
+                                <td><span class='sudah-absen' style='color:white;'><i class='fas fa-check'></i> Sudah Kumpul</span></td>
+                                <td><button name='view_files' data-name='".$file."' class='view_files'><i class='fas fa-eye'></i> Lihat</button></td>
+                            </tr>
+                            ";
+                        }
                     }
                 }
             }
@@ -122,7 +144,19 @@ if(isset($_POST['action'])){
             <input type='hidden' name='old_name' id='old_name'>
             </div>
             <div class='grup-input'>
-            <button name='folder_button' id='folder_button'><i class='fas fa-folder-plus'></i> Buat Folder</button>
+                <input type='text' name='tanggal_kumpul' id='tanggal_kumpul' placeholder='Tanggal Pengumpulan' required>
+            </div>
+            <div class='grup-input'>
+                <input type='text' name='waktu_kumpul' id='waktu_kumpul' placeholder='Waktu Pengumpulan' required>
+            </div>
+            <div class='grup-input'>
+                <input type='text' name='tempat_kumpul' id='tempat_kumpul' placeholder='Tempat Pengumpulan' required>
+            </div>
+            <div class='grup-input'>
+                <textarea rows='10' cols='30' name='catatan' id='catatan' placeholder='Catatan' required></textarea>
+            </div>
+            <div class='grup-input'>
+            <button name='folder_button' id='folder_button'><i class='fas fa-folder-plus'></i> Buat Folder Pengumpulan</button>
             </div>
         ";
         echo $output;
@@ -144,22 +178,28 @@ if(isset($_POST['action'])){
         $output = "
             <form action='' method='post' enctype='multipart/form-data' id='upload_form'>
             <div class='grup-input'>
-                <textarea rows='10' cols='30' placeholder='Ketik pesanmu' name='pesan'></textarea>
                 <input type='hidden' name='hidden_folder_name' id='hidden_folder_name' value='".$_POST['folder_name']."'>
             </div>
             <div class='grup-input'>
-                <input type='file' name='upload_file' required>
+                <input type='file' name='upload_file' accept='.zip' required>
             </div>
             <div class='grup-input'>
-                <button type='submit'><i class='fas fa-upload'></i> Unggah</button>
+                <button type='submit'><i class='fas fa-upload'></i> Kumpul</button>
             </div>
             </form>
         ";
         echo $output;
     }
     if($_POST['action'] == "create"){
-        if(!file_exists("materials/".$_POST['folder_name'])){
-            mkdir("materials/".$_POST['folder_name'], 0777, true);
+        if(!file_exists("assignments/".$_POST['folder_name'])){
+            mkdir("assignments/".$_POST['folder_name'], 0777, true);
+            $event = $_POST['folder_name'];
+            $date = $_POST['tanggal_kumpul'];
+            $time = $_POST['waktu_kumpul'];
+            $place = $_POST['tempat_kumpul'];
+            $note = $_POST['catatan'];
+            $nim = $_SESSION['NIM'];
+            mysqli_query($conn, "INSERT INTO event (Name, Date, Time, Place, Note, NIM) VALUES ('$event', '$date', '$time', '$place', '$note', '$nim')");
             echo "Folder created";
         }else{
             echo "Folder already created";
@@ -174,7 +214,7 @@ if(isset($_POST['action'])){
         }
     }
     if($_POST['action'] == "fetch_files"){
-        $file_data = scandir("materials/".$_POST['folder_name']);
+        $file_data = scandir("assignments/".$_POST['folder_name']);
         natcasesort($file_data);
         if($_SESSION['Role'] == 1){
             $output = "
@@ -189,7 +229,7 @@ if(isset($_POST['action'])){
                 <table class='table table-bordered tabel-striped'>
                     <tr>
                         <th>Nama Berkas</th>
-                        <th colspan='1' width='10%'>Aksi</th>
+                        <th colspan='2' width='20%'>Aksi</th>
                     </tr>
             ";
         }
@@ -198,7 +238,7 @@ if(isset($_POST['action'])){
                 if($file === "." OR $file === ".."){
                     continue;
                 }else{
-                    $path = "materials/" . $_POST['folder_name'] . "/" . $file;
+                    $path = "assignments/" . $_POST['folder_name'] . "/" . $file;
                     if($_SESSION['Role'] == 1){
                         $output .= "
                             <tr>
@@ -209,12 +249,17 @@ if(isset($_POST['action'])){
                             </tr>
                         ";
                     }else{
-                        $output .= "
-                            <tr>
-                                <td data-folder_name='".$_POST['folder_name']."' class='change_file_name' data-folder_name='".$_POST['folder_name']."' data-file_name='".$file."'  class='editable'>".$file."</td>
-                                <td><a href='".$path."'><button name='download' id='".$path."'><i class='fas fa-download'></i> Unduh</button></a></td>
-                            </tr>
-                        ";
+                        if($file != $_SESSION['NIM'].".zip"){
+                            continue;
+                        }else{
+                                $output .= "
+                                    <tr>
+                                        <td data-folder_name='".$_POST['folder_name']."' class='change_file_name' data-folder_name='".$_POST['folder_name']."' data-file_name='".$file."'  class='editable'>".$file."</td>
+                                        <td><button name='remove_file' class='konfirmasi-box-remove' id='".$path."'><i class='fas fa-trash'></i> Hapus</button></td>
+                                        <td><a href='".$path."'><button name='download' id='".$path."'><i class='fas fa-download'></i> Unduh</button></a></td>
+                                    </tr>
+                                ";
+                        }
                     }
                 }
             }
@@ -237,23 +282,22 @@ if(isset($_POST['action'])){
         }
     }
     if($_POST['action'] == "delete"){
-        $file_data = scandir("materials/".$_POST['folder_name']);
+        $file_data = scandir("assignments/".$_POST['folder_name']);
         foreach($file_data as $file){
             if($file === "." OR $file === ".."){
                 continue;
             }else{
-                unlink("materials/".$_POST['folder_name'] . "/" . $file);
+                unlink("assignments/".$_POST['folder_name'] . "/" . $file);
             }
         }
-        if(rmdir("materials/".$_POST['folder_name'])){
+        if(rmdir("assignments/".$_POST['folder_name'])){
             echo "Folder deleted";
         }
     }
     if($_POST['action'] == "change_file_name"){
-        $old_name = "materials/" . $_POST['folder_name'] . "/" . $_POST['old_file_name'];
-        $new_name = "materials/" . $_POST['folder_name'] . "/" . $_POST['new_file_name'];
+        $old_name = "assignments/" . $_POST['folder_name'] . "/" . $_POST['old_file_name'];
+        $new_name = "assignments/" . $_POST['folder_name'] . "/" . $_POST['new_file_name'];
         if(rename($old_name, $new_name)){
-            mysqli_query($conn, "UPDATE post SET Content='$new_name' WHERE Content='$old_name'");
             echo "File name udah diubah";
         }else{
             echo "error";
