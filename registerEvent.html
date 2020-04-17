@@ -1,0 +1,29 @@
+<!-- registerEvent.html ini buat daftarin event sm list partisipannya-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <script src="loadAllNIM.js"></script>
+</head>
+<body>
+    <!-- butuhnya : EventID, startDate, EndDate, Place, Note; -->
+    <form action="registerEvent.php" method="POST">
+        <label for="EventTitle">EventTitle</label>
+        <input type="text" name="EventTitle" id="EventTitle">
+        <label for="StartDate">StartDate</label>
+        <input type="datetime" name="StartDate" id="StartDate">
+        <label for="EndDate">EndDate</label>
+        <input type="datetime" name="EndDate" id="EndDate">
+        <label for="Place">Place</label>
+        <input type="text" name="Place" id="Place">
+        <label for="Note">Note</label>
+        <input type="text" name="Note" id="Note">
+        <div id="resultNIM"></div>
+        <input type="submit" name="submit">
+    </form>
+    
+</body>
+</html>
