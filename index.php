@@ -8,6 +8,7 @@
     $queryUser = mysqli_query($conn, "SELECT * FROM user WHERE NIM='$nim'");
     $user = mysqli_fetch_assoc($queryUser);
     $queryPost = mysqli_query($conn, "SELECT * FROM post INNER JOIN user ON post.NIM = user.NIM ORDER BY ID DESC");
+    $queryAcara = mysqli_query($conn, "SELECT * FROM event WHERE Date >= CURRENT_TIMESTAMP");
     include "header.php"; 
 ?>
     <nav>
@@ -63,9 +64,10 @@
         </div>
         <div id="postingan-utama">
             <?php while($rowPost = mysqli_fetch_assoc($queryPost)){
-                if(!file_exists($rowPost['Content'])){
-                    continue;
-                }
+                if($rowPost['Type'] == 0){
+                    if(!file_exists($rowPost['Content'])){
+                        continue;
+                    }
             ?>
             <div class="postingan-item">
                 <div class="yang-post">
@@ -86,7 +88,35 @@
                 </div>
                 <a href="<?php echo $rowPost['Content']; ?>"><div class="materi-item"><i class="fas fa-file"></i> <?php echo $rowPost['Content']; ?></div></a>
             </div>
-            <?php } ?>
+            <?php 
+                }elseif ($rowPost['Type'] == 1) {
+                    $idAcara = $rowPost['Content'];
+                    $resAcaraPost = mysqli_query($conn, "SELECT * FROM event WHERE ID='$idAcara'");
+                    $rowAcaraPost = mysqli_fetch_assoc($resAcaraPost);
+            ?>
+                <div class="postingan-item">
+                <div class="yang-post">
+                    <div class="foto-ts">
+                        <img src="./assets/images/account.png" alt="" srcset="">
+                    </div>
+                    <div class="yang-post-kanan">
+                        <div class="nama-ts">
+                            <?php echo $rowPost['Name']; ?>
+                        </div>
+                        <div class="waktu-post">
+                            <?php echo $rowPost['Time']; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="isi-post">
+                    <?php echo $rowPost['Message']; ?>
+                </div>
+                <a href="detail_acara.php?id=<?php echo $rowPost['Content']; ?>"><div class="materi-item"><i class="fas fa-calendar"></i> <?php echo $rowAcaraPost['Name']; ?><br><?php echo $rowAcaraPost['Date']; ?> di <?php echo $rowAcaraPost['Place']; ?></div></a>
+            </div>
+            <?php
+                }
+            } 
+            ?>
             <footer>
                     2020 &copy; CIH!
             </footer>
@@ -95,34 +125,28 @@
             <div id="waktu">
                 <div id="tanggal"></div>
                 <div id="jam"></div>
-                
+                <?php if(mysqli_num_rows($queryAcara) == 0){ ?>
+                    <div class="acara-item">
+                        <div class="judul-acara">Tidak ada acara</div>
+                    </div>
+                <?php }else{ ?>
+                <?php while($rowAcara = mysqli_fetch_assoc($queryAcara)){ ?>
+                <a href="detail_acara.php?id=<?php echo $rowAcara['ID']; ?>" style="color: white;">
                 <div class="acara-item">
                     <div class="acara-kiri">
                         <i class="fas fa-calendar"></i>
                     </div>
                     <div class="acara-kanan">
                         <div class="judul-acara">
-                            Tukar Kado
+                            <?php echo $rowAcara['Name']; ?>
                         </div>
                         <div class="detail-acara">
-                            17:30 WIB, Ruang A801
+                            <?php echo $rowAcara['Date'] . " " . $rowAcara['Time']; ?>, <?php echo $rowAcara['Place']; ?>
                         </div>
                     </div>
                 </div>
-                
-                <div class="acara-item">
-                    <div class="acara-kiri">
-                        <i class="fas fa-calendar"></i>
-                    </div>
-                    <div class="acara-kanan">
-                        <div class="judul-acara">
-                            Tukar Kado
-                        </div>
-                        <div class="detail-acara">
-                            17:30 WIB, Ruang A801
-                        </div>
-                    </div>
-                </div>
+                </a>
+                <?php } }?>
             </div>
         </div>
     </div>
@@ -130,8 +154,8 @@
         $(document).ready(function(){
             // console.log("jquery masuk");
             setInterval(function(){
-                $('#jumlah-orang').load("get_jumlah_belum_absen_data.php").fadeIn("slow");
-                $('#status-absen').load("get_status_absen_data.php").fadeIn("slow");
+                $('#jumlah-orang').load("get_jumlah_belum_absen_data.php").fadeIn();
+                $('#status-absen').load("get_status_absen_data.php").fadeIn();
             }, 1000);
         });
     </script>

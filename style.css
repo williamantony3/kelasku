@@ -358,7 +358,7 @@ section{
     position: relative;
     width: 100%;
 }
-.kotak, #konfirmasi-box{
+.kotak, #konfirmasi-box, .kotak-acara{
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
@@ -370,6 +370,20 @@ section{
 }
 .kotak{
     flex-direction: column;
+}
+.kotak-acara{
+    flex-direction: row;
+    justify-content: space-between;
+}
+.kotak-acara .acara-item{
+    background-color: #7C4DFF;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
+}
+.kotak-acara .acara-item .judul-acara, .kotak-acara .acara-item .acara-kiri{
+    color: #ffffff;
 }
 #konfirmasi{
     position: absolute;
@@ -447,4 +461,24 @@ table button{
 }
 .delete, .remove{
     display: none;
+}
+#calendar{
+    width: 60%;
+}
+#acara-detail{
+    width: 30%;
+}
+#juduldetailacara{
+    background-color: #7C4DFF;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
+}
+#juduldetailacara .data-diri-header{
+    font-size: 12px;
+}
+#juduldetailacara p{
+    font-size: 14px;
+    color: #ffffff;
 }
