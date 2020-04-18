@@ -22,20 +22,15 @@
             }
         }
     }
+    $id = $_GET['id'];
+    $resPost = mysqli_query($conn, "SELECT * FROM post WHERE ID='$id'");
+    $rowPost = mysqli_fetch_assoc($resPost);
     if($_SERVER['REQUEST_METHOD'] == "POST"){
-        $nama_acara = $_POST['nama_acara'];
-        $tanggal_acara = $_POST['tanggal_acara'];
-        $waktu_acara = $_POST['waktu_acara'];
-        $tempat_acara = $_POST['tempat_acara'];
         $catatan = $_POST['catatan'];
         $nim = $_SESSION['NIM'];
-        $query = mysqli_query($conn, "INSERT INTO event (Name, Date, Time, Place, Note, NIM) VALUES ('$nama_acara', '$tanggal_acara', '$waktu_acara', '$tempat_acara', '$catatan', '$nim')");
-        if($query){
-            $id = mysqli_insert_id($conn);
-            mysqli_query($conn, "INSERT INTO post (NIM, Message, Type, Content) VALUES ('$nim', '$catatan', 1, '$id')");
-        }
-        $_SESSION['great'] = "Aksi berhasil";
-        header("Location: events.php");
+        mysqli_query($conn, "UPDATE post SET Message='$catatan', Content='$catatan', NIM='$nim' WHERE ID='$id'");
+        $_SESSION['great'] = "Aksi Berhasil";
+        header("Location: index.php");
     }
 ?>
 <!DOCTYPE html>
@@ -83,69 +78,10 @@
             display: none;
         }
     </style>
+    
     <script>
         function validateForm() {
-            var nama_acara = document.forms["addEvent"]["nama_acara"].value;
-            var tanggal_acara = document.forms["addEvent"]["tanggal_acara"].value;
-            var waktu_acara = document.forms["addEvent"]["waktu_acara"].value;
-            var tempat_acara = document.forms["addEvent"]["tempat_acara"].value;
-            var catatan = document.forms["addEvent"]["catatan"].value;
-
-            var nama_acaraValid = true;
-            if (nama_acara=== "") {
-                document.getElementById("folder_name").style.border = "1px solid #FF5252";
-                var error = "Nama acara belum diisi";
-                var element = document.getElementById("error-nama_acara");
-                element.innerHTML = error;
-                nama_acaraValid = false;
-            }else{
-                document.getElementById("folder_name").style.border = "none";
-                var element = document.getElementById("error-nama_acara");
-                element.innerHTML = "";
-                nama_acaraValid = true;
-            }
-            
-            var tanggal_acaraValid = true;
-            if (!tanggal_acara) {
-                document.getElementById("tanggal_kumpul").style.border = "1px solid #FF5252";
-                var error = "Tanggal acara belum diisi";
-                var element = document.getElementById("error-tanggal_acara");
-                element.innerHTML = error;
-                tanggal_acaraValid = false;
-            }else{
-                document.getElementById("tanggal_kumpul").style.border = "none";
-                var element = document.getElementById("error-tanggal_acara");
-                element.innerHTML = "";
-                tanggal_acaraValid = true;
-            }
-            
-            var waktu_acaraValid = true;
-            if (!waktu_acara) {
-                document.getElementById("waktu_kumpul").style.border = "1px solid #FF5252";
-                var error = "Waktu acara belum diisi";
-                var element = document.getElementById("error-waktu_acara");
-                element.innerHTML = error;
-                waktu_acaraValid = false;
-            }else{
-                document.getElementById("waktu_kumpul").style.border = "none";
-                var element = document.getElementById("error-waktu_acara");
-                element.innerHTML = "";
-                waktu_acaraValid = true;
-            }
-            
-            var tempat_acaraValid = true;
-            if (tempat_acara==="") {
-                document.getElementById("tempat_kumpul").style.border = "1px solid #FF5252";
-                var error = "Tempat acara belum diisi";
-                var element = document.getElementById("error-tempat_acara");
-                element.innerHTML = error;
-                tempat_acaraValid = false;
-            }else{
-                document.getElementById("tempat_kumpul").style.border = "none";
-                var element = document.getElementById("error-tempat_acara");
-                element.innerHTML = "";
-                tempat_acaraValid = true;
-            }
+            var catatan = document.forms["createPost"]["catatan"].value;
             
             var catatanValid = true;
             if (catatan==="") {
@@ -161,12 +97,11 @@
                 catatanValid = true;
             }
 
-            if(!nama_acaraValid || !tanggal_acaraValid || !waktu_acaraValid || !tempat_acaraValid || !catatanValid){
+            if(!catatanValid){
                 return false;
             }
         }
     </script>
-
 </head>
 <body onload="startTime()">
     <nav>
@@ -180,7 +115,7 @@
                     <a href="turn-in.php"><div class="menu-item"><i class="fas fa-edit"></i> Kumpul Tugas</div></a>
                     <a href="materials.php"><div class="menu-item"><i class="fas fa-book"></i> Materi Kuliah</div></a>
                     <a href="seating.php"><div class="menu-item"><i class="fas fa-chair"></i> Cek Kursi</div></a>
-                    <a href="events.php"><div class="menu-item selected"><i class="fas fa-calendar"></i> Acara Kelas</div></a>
+                    <a href="events.php"><div class="menu-item"><i class="fas fa-calendar"></i> Acara Kelas</div></a>
                 </div>
             </div>
             <div id="nav-kanan">
@@ -221,33 +156,17 @@
     <div class="container">
         <section>
             <div class="judul-section">
-                <h1>Acara Kelas</h1>
-                <a href="events.php"><button id="up"><i class="fas fa-angle-left"></i> Kembali</button></a>
+                <h1>Ubah Postingan</h1>
+                <a href="index.php"><button><i class="fas fa-angle-left"></i> Kembali</button></a>
             </div>
             <div class="kotak">
-                <form action="" method="post" onsubmit="return validateForm()" name="addEvent">
+                <form action="" method="post" name="createPost" onsubmit="return validateForm()">
                 <div class='grup-input'>
-                    <input type='text' name='nama_acara' id='folder_name' placeholder='Nama Acara'>
-                    <div class="error-msg" id="error-nama_acara"></div>
-                </div>
-                <div class='grup-input'>
-                    <input type='text' name='tanggal_acara' id='tanggal_kumpul' placeholder='Tanggal Acara'>
-                    <div class="error-msg" id="error-tanggal_acara"></div>
-                </div>
-                <div class='grup-input'>
-                    <input type='text' name='waktu_acara' id='waktu_kumpul' placeholder='Waktu Acara'>
-                    <div class="error-msg" id="error-waktu_acara"></div>
-                </div>
-                <div class='grup-input'>
-                    <input type='text' name='tempat_acara' id='tempat_kumpul' placeholder='Tempat Acara'>
-                    <div class="error-msg" id="error-tempat_acara"></div>
-                </div>
-                <div class='grup-input'>
-                    <textarea rows='10' cols='30' name='catatan' id='catatan' placeholder='Catatan Acara'></textarea>
+                    <textarea rows='10' cols='30' name='catatan' id='catatan' placeholder='Apa yang kamu pikirkan?' style="width: 80%;"><?php echo $rowPost['Message']; ?></textarea>
                     <div class="error-msg" id="error-catatan"></div>
                 </div>
                 <div class='grup-input'>
-                <button name='folder_button' id='folder_button' type="submit"><i class='fas fa-calendar'></i> Buat Acara</button>
+                <button name='folder_button' id='folder_button' type="submit"><i class='fas fa-pencil-alt'></i> Ubah Postingan</button>
 
                 </form>
             </div>

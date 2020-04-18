@@ -13,12 +13,13 @@ if($_FILES['upload_file']['name'] != ""){
             $nim = $_SESSION['NIM'];
             $msg = $_POST['pesan'];
             mysqli_query($conn, "INSERT INTO post(NIM, Message, Type, Content) VALUES ('$nim', '$msg', 0, '$path')");
-            echo $msg;
+            mysqli_query($conn, "INSERT INTO file(Path, NIM) VALUES ('$path', '$nim')");
+            $_SESSION['great'] = "Aksi berhasil";
         }else{
-            echo "There is some error";
+            $_SESSION['error'] = "Kesalahan saat unggah berkas";
         }
     }else{
-        echo "Invalid extension";
+        $_SESSION['error'] = "Ekstensi berkas tidak didukung";
     }
 }else{
     echo "Please select image";

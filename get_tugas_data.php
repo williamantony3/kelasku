@@ -38,21 +38,78 @@ if(isset($_POST['action'])){
         // $file_data = array_filter("materials/".$file_data, 'is_dir');
         // $output = "<button id='create_folder'>Folder Baru</button>";
         if($_SESSION['Role'] == 1){
-            $output = "
-                <table class='table table-bordered table-striped'>
-                    <tr>
-                        <th>Tugas</th>
-                        <th colspan='3' width='30%'>Aksi</th>
-                    </tr>
-            ";
+            if(isset($_SESSION['error'])){
+                $output = "<div class='grup-input' onclick='$(this).hide()'>
+                <div class='error-box'>".$_SESSION['error']."</div>
+                </div>";
+                unset($_SESSION['error']);
+                $output .= "
+                    <table class='table table-bordered table-striped'>
+                        <tr>
+                            <th>Tugas</th>
+                            <th colspan='3' width='30%'>Aksi</th>
+                        </tr>
+                ";
+            }elseif (isset($_SESSION['great'])) {
+                $output = "<div class='grup-input' onclick='$(this).hide()'>
+                <div class='success-box'>".$_SESSION['great']."</div>
+                </div>";
+                unset($_SESSION['great']);
+                $output .= "
+                    <table class='table table-bordered table-striped'>
+                        <tr>
+                            <th>Tugas</th>
+                            <th colspan='3' width='30%'>Aksi</th>
+                        </tr>
+                ";
+            }
+            else{
+                $output = "
+                    <table class='table table-bordered table-striped'>
+                        <tr>
+                            <th>Tugas</th>
+                            <th colspan='3' width='30%'>Aksi</th>
+                        </tr>
+                ";
+
+            }
         }else{
-            $output = "
-                <table class='table table-bordered table-striped'>
-                    <tr>
-                        <th>Nama Folder / Berkas</th>
-                        <th colspan='2' width='20%'>Aksi</th>
-                    </tr>
-            ";
+            if(isset($_SESSION['error'])){
+                $output = "<div class='grup-input' onclick='$(this).hide()'>
+                <div class='error-box'>".$_SESSION['error']."</div>
+                </div>";
+                unset($_SESSION['error']);
+                $output .= "
+                    <table class='table table-bordered table-striped'>
+                        <tr>
+                            <th>Tugas</th>
+                            <th colspan='2' width='20%'>Aksi</th>
+                        </tr>
+                ";
+
+            }elseif(isset($_SESSION['great'])){
+                $output = "<div class='grup-input' onclick='$(this).hide()'>
+                <div class='success-box'>".$_SESSION['great']."</div>
+                </div>";
+                unset($_SESSION['great']);
+                $output .= "
+                    <table class='table table-bordered table-striped'>
+                        <tr>
+                            <th>Tugas</th>
+                            <th colspan='2' width='20%'>Aksi</th>
+                        </tr>
+                ";
+
+            }
+            else{
+                $output = "
+                    <table class='table table-bordered table-striped'>
+                        <tr>
+                            <th>Tugas</th>
+                            <th colspan='2' width='20%'>Aksi</th>
+                        </tr>
+                ";
+            }
         }
         if(count($file_data)>0){
             foreach($file_data as $file){
@@ -142,7 +199,9 @@ if(isset($_POST['action'])){
                 <input type='text' name='folder_name' id='folder_name' placeholder='Nama Folder' required>
             <input type='hidden' name='action' id='action' value='create'>
             <input type='hidden' name='old_name' id='old_name'>
+            <div class='error-msg' id='error-folder_name' style='display: none;'></div>
             </div>
+            <!--
             <div class='grup-input'>
                 <input type='text' name='tanggal_kumpul' id='tanggal_kumpul' placeholder='Tanggal Pengumpulan' required>
             </div>
@@ -155,6 +214,7 @@ if(isset($_POST['action'])){
             <div class='grup-input'>
                 <textarea rows='10' cols='30' name='catatan' id='catatan' placeholder='Catatan' required></textarea>
             </div>
+            -->
             <div class='grup-input'>
             <button name='folder_button' id='folder_button'><i class='fas fa-folder-plus'></i> Buat Folder Pengumpulan</button>
             </div>
@@ -181,10 +241,11 @@ if(isset($_POST['action'])){
                 <input type='hidden' name='hidden_folder_name' id='hidden_folder_name' value='".$_POST['folder_name']."'>
             </div>
             <div class='grup-input'>
-                <input type='file' name='upload_file' accept='.zip' required>
+                <input type='file' id='upload_file' name='upload_file' accept='.zip'>
+                <div class='error-msg' id='error-upload_file'></div>
             </div>
             <div class='grup-input'>
-                <button type='submit'><i class='fas fa-upload'></i> Kumpul</button>
+                <button type='submit' id='buat-folder'><i class='fas fa-upload'></i> Kumpul</button>
             </div>
             </form>
         ";
@@ -193,17 +254,22 @@ if(isset($_POST['action'])){
     if($_POST['action'] == "create"){
         if(!file_exists("assignments/".$_POST['folder_name'])){
             mkdir("assignments/".$_POST['folder_name'], 0777, true);
-            $event = $_POST['folder_name'];
-            $date = $_POST['tanggal_kumpul'];
-            $time = $_POST['waktu_kumpul'];
-            $place = $_POST['tempat_kumpul'];
-            $note = $_POST['catatan'];
+            $path = "assignments/".$_POST['folder_name'];
             $nim = $_SESSION['NIM'];
-            mysqli_query($conn, "INSERT INTO event (Name, Date, Time, Place, Note, NIM) VALUES ('$event', '$date', '$time', '$place', '$note', '$nim')");
+            mysqli_query($conn, "INSERT INTO file(Path, NIM) VALUES ('$path', '$nim')");
+            // $event = $_POST['folder_name'];
+            // $date = $_POST['tanggal_kumpul'];
+            // $time = $_POST['waktu_kumpul'];
+            // $place = $_POST['tempat_kumpul'];
+            // $note = $_POST['catatan'];
+            // $nim = $_SESSION['NIM'];
+            // mysqli_query($conn, "INSERT INTO event (Name, Date, Time, Place, Note, NIM) VALUES ('$event', '$date', '$time', '$place', '$note', '$nim')");
             echo "Folder created";
+            $_SESSION['great']="Aksi berhasil";
         }else{
             echo "Folder already created";
         }
+        $_SESSION['great']="Aksi berhasil";
     }
     if($_POST['action'] == "change"){
         if(!file_exists("materials/".$_POST['folder_name'])){
@@ -278,7 +344,7 @@ if(isset($_POST['action'])){
     if($_POST['action'] == "remove_file"){
         if(file_exists($_POST['path'])){
             unlink($_POST['path']);
-            echo "File deleted";
+            $_SESSION['great'] = "Aksi Berhasil";
         }
     }
     if($_POST['action'] == "delete"){
@@ -291,16 +357,18 @@ if(isset($_POST['action'])){
             }
         }
         if(rmdir("assignments/".$_POST['folder_name'])){
-            echo "Folder deleted";
+            $_SESSION['great'] = "Aksi Berhasil";
         }
     }
     if($_POST['action'] == "change_file_name"){
         $old_name = "assignments/" . $_POST['folder_name'] . "/" . $_POST['old_file_name'];
         $new_name = "assignments/" . $_POST['folder_name'] . "/" . $_POST['new_file_name'];
+        $nim = $_SESSION['NIM'];
         if(rename($old_name, $new_name)){
-            echo "File name udah diubah";
+            mysqli_query($conn, "INSERT INTO file (Path, NIM) VALUES ('$new_name', '$nim')");
+            $_SESSION['great'] = "Aksi Berhasil";
         }else{
-            echo "error";
+            $_SESSION['error'] = "Pastikan nama file sudah diisi";
         }
     }
 }

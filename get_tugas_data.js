@@ -57,7 +57,9 @@ $(document).ready(function () {
             });
 
         } else {
-            alert("Enter folder name");
+            $("#folder_name").css("border", "1px solid #FF5252");
+            $("#error-folder_name").html("Nama belum diisi");
+            $("#error-folder_name").show();
         }
     });
     $(document).on("click", ".konfirmasi-box", function () {
@@ -122,6 +124,20 @@ $(document).ready(function () {
                 $(".judul-section").html("<h1>Kumpul Tugas</h1><button id='up'><i class='fas fa-angle-left'></i> Kembali</button>");
             }
         });
+    });
+    $(document).on("click", "#buat-folder", function(){
+            var upload_file = $("#upload_file").val();
+            if(!upload_file){
+                if(!upload_file){
+                    $("#upload_file").css("border", "1px solid #FF5252");
+                    $("#error-upload_file").html("File belum diisi");
+                    $("#error-upload_file").show();
+                }else{
+                    $("#upload_file").css("border", "none");
+                    $("#error-upload_file").hide();
+                }
+                return false;
+            }
     });
     $(document).on("submit", "#upload_form", function () {
         $.ajax({

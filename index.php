@@ -11,6 +11,20 @@
     $queryAcara = mysqli_query($conn, "SELECT * FROM event WHERE Date >= CURRENT_TIMESTAMP");
     include "header.php"; 
 ?>
+    <div id="konfirmasi">
+        <div id="konfirmasi-box">
+            <div id="konfirmasi-logo">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div id="konfirmasi-pesan">
+                Kamu yakin ingin melanjutkan?
+            </div>
+            <div id="konfirmasi-button">
+                <a id="deletepost"><button>Ya</button></a>
+                <button class="cancel">Tidak</button>
+            </div>
+        </div>
+    </div>
     <nav>
         <div class="container space-between">
             <div id="nav-kiri">
@@ -34,7 +48,13 @@
                     </div>
                 </div>
                 <div id="profil">
-                    <img src="./assets/images/account.png" alt="">
+                        <?php 
+                        if(empty($user['ProfilePicture'])){
+                        ?>
+                        <img src="./assets/images/account.png" alt="" srcset="">
+                        <?php }else{ ?>
+                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <?php }  ?>
                 </div>
             </div>
         </div>
@@ -63,6 +83,21 @@
             </div>
         </div>
         <div id="postingan-utama">
+                
+            <?php if(isset($_SESSION['error'])){ ?>
+            <div class="postingan-item" onclick="$(this).hide()">
+                <div class="error-box"><?php echo $_SESSION['error']; ?></div>
+            </div>
+            <?php unset($_SESSION['error']);} ?>
+            <?php if(isset($_SESSION['great'])){ ?>
+                
+            <div class="postingan-item" onclick="$(this).hide()">
+                <div class="success-box"><?php echo $_SESSION['great']; ?></div>
+            </div>
+            <?php unset($_SESSION['great']);} ?>
+            <div class="postingan-item">
+            <a href="create_post.php"><button style="width: 100%;"><i class='fas fa-pencil-alt'></i> Buat Postingan</button></a>
+            </div>
             <?php while($rowPost = mysqli_fetch_assoc($queryPost)){
                 if($rowPost['Type'] == 0){
                     if(!file_exists($rowPost['Content'])){
@@ -72,7 +107,13 @@
             <div class="postingan-item">
                 <div class="yang-post">
                     <div class="foto-ts">
+                        <?php 
+                        if(empty($user['ProfilePicture'])){
+                        ?>
                         <img src="./assets/images/account.png" alt="" srcset="">
+                        <?php }else{ ?>
+                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <?php }  ?>
                     </div>
                     <div class="yang-post-kanan">
                         <div class="nama-ts">
@@ -97,7 +138,13 @@
                 <div class="postingan-item">
                 <div class="yang-post">
                     <div class="foto-ts">
+                        <?php 
+                        if(empty($user['ProfilePicture'])){
+                        ?>
                         <img src="./assets/images/account.png" alt="" srcset="">
+                        <?php }else{ ?>
+                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <?php }  ?>
                     </div>
                     <div class="yang-post-kanan">
                         <div class="nama-ts">
@@ -111,8 +158,44 @@
                 <div class="isi-post">
                     <?php echo $rowPost['Message']; ?>
                 </div>
-                <a href="detail_acara.php?id=<?php echo $rowPost['Content']; ?>"><div class="materi-item"><i class="fas fa-calendar"></i> <?php echo $rowAcaraPost['Name']; ?><br><?php echo $rowAcaraPost['Date']; ?> di <?php echo $rowAcaraPost['Place']; ?></div></a>
-            </div>
+                <a href="detail_acara.php?id=<?php echo $rowPost['Content']; ?>"><div class="materi-item" style="display: flex; flex-direction: row; align-items: center;">
+                <div><i class="fas fa-calendar"></i></div>
+                <div style="margin-left: 10px;"><?php echo $rowAcaraPost['Name']; ?><br><?php echo $rowAcaraPost['Date']; ?> di <?php echo $rowAcaraPost['Place']; ?></div>
+                </div></a>
+                </div>
+            <?php
+                }elseif ($rowPost['Type'] == 2) {
+            ?>
+                <div class="postingan-item">
+                <div class="yang-post">
+                    <div class="foto-ts">
+                        <?php 
+                        if(empty($user['ProfilePicture'])){
+                        ?>
+                        <img src="./assets/images/account.png" alt="" srcset="">
+                        <?php }else{ ?>
+                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <?php }  ?>
+                    </div>
+                        <div class="yang-post-kanan">
+                            <div class="nama-ts">
+                                <?php echo $rowPost['Name']; ?>
+                            </div>
+                            <div class="waktu-post">
+                                <?php echo $rowPost['Time']; ?>
+                            </div>
+                        </div>
+                </div>
+                <div class="isi-post" style="text-align: justify;">
+                    <?php echo $rowPost['Message']; ?>
+                </div>
+                    <?php if($_SESSION['Role'] == 1 || $_SESSION['NIM'] == $rowPost['NIM']){?>
+                        <div class="post-setting">
+                            <a href="update_post.php?id=<?php echo $rowPost['ID']; ?>"><i class="fas fa-edit"></i> Ubah</a>&nbsp;&nbsp;
+                            <a style="cursor: pointer;" id="hapus-post" data-id="<?php echo $rowPost['ID']; ?>"><i class="fas fa-trash"></i> Hapus</a>
+                        </div>
+                    <?php } ?>
+                </div>
             <?php
                 }
             } 
@@ -157,6 +240,11 @@
                 $('#jumlah-orang').load("get_jumlah_belum_absen_data.php").fadeIn();
                 $('#status-absen').load("get_status_absen_data.php").fadeIn();
             }, 1000);
+            $(document).on("click", "#hapus-post", function(){
+                $("#konfirmasi").show("slow");
+                var id = $(this).data("id");
+                $("#deletepost").attr("href", "delete_post.php?id="+id);
+            });
         });
     </script>
 <?php include "footer.php"; ?>

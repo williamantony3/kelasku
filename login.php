@@ -14,7 +14,7 @@
             $_SESSION['Role'] = $user['Role'];
             header("Location: index.php");
         }else{
-            echo "salah";
+            $_SESSION['error'] = "Kombinasi Nama Pengguna dengan Kata Sandi tidak cocok";
         }
     }
 ?>
@@ -29,6 +29,44 @@
     <link rel="stylesheet" href="./assets/fontawesome-free-5.12.1-web/css/all.css">
     <script src="./assets/scripts/jquery-3.4.1.min.js"></script>
     <script src="get_absen_data.js"></script>
+    <script>
+        function validateForm() {
+            var username = document.forms["loginForm"]["username"].value;
+            var password = document.forms["loginForm"]["password"].value;
+
+            var usernameValid = true;
+            if (username=== "") {
+                document.getElementById("username").style.border = "1px solid #FF5252";
+                var error = "Nama Pengguna belum diisi";
+                var element = document.getElementById("error-username");
+                element.innerHTML = error;
+                usernameValid = false;
+            }else{
+                document.getElementById("username").style.border = "none";
+                var element = document.getElementById("error-username");
+                element.innerHTML = "";
+                usernameValid = true;
+            }
+            
+            var passwordValid = true;
+            if (password=== "") {
+                document.getElementById("password").style.border = "1px solid #FF5252";
+                var error = "Kata Sandi belum diisi";
+                var element = document.getElementById("error-password");
+                element.innerHTML = error;
+                passwordValid = false;
+            }else{
+                document.getElementById("password").style.border = "none";
+                var element = document.getElementById("error-password");
+                element.innerHTML = "";
+                usernameValid = true;
+            }
+
+            if(!usernameValid || !passwordValid){
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
     <div id="login-page">
@@ -48,12 +86,19 @@
         </div>
         <div id="login-page-kanan">
             <h2>Masuk Kelasku</h2>
-            <form action="" method="post">
+            <?php if(isset($_SESSION['error'])){ ?>
+                <div class="grup-input" onclick="$(this).hide()">
+                <div class="error-box"><?php echo $_SESSION['error']; ?></div>
+                </div>
+            <?php unset($_SESSION['error']);} ?>
+            <form action="" method="post" name="loginForm" onsubmit="return validateForm()">
                 <div class="grup-input">
-                    <input type="text" name="username" required="required" placeholder="Nama Pengguna">
+                    <input type="text" name="username" placeholder="Nama Pengguna" id="username">
+                    <div class="error-msg" id="error-username"></div>
                 </div>
                 <div class="grup-input">
-                    <input type="password" name="password" required="required" placeholder="Kata Sandi">
+                    <input type="password" name="password" placeholder="Kata Sandi" id="password">
+                    <div class="error-msg" id="error-password"></div>
                 </div>
                 <div class="grup-input">
                     <button type="submit">Masuk</button>

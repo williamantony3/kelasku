@@ -95,7 +95,13 @@
                     </div>
                 </div>
                 <div id="profil">
-                    <img src="./assets/images/account.png" alt="">
+                        <?php 
+                        if(empty($user['ProfilePicture'])){
+                        ?>
+                        <img src="./assets/images/account.png" alt="" srcset="">
+                        <?php }else{ ?>
+                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <?php }  ?>
                 </div>
             </div>
         </div>
@@ -120,7 +126,15 @@
             <div class="judul-section">
                 <h1>Acara Kelas</h1>
                 <a href="add-event.php"><button id='create_folder'><i class="fas fa-calendar"></i> Buat Acara</button></a>
-            </div>
+            </div><?php if(isset($_SESSION['error'])){ ?>
+                <div class="grup-input" onclick="$(this).hide()">
+                <div class="error-box"><?php echo $_SESSION['error']; ?></div>
+                </div>
+            <?php unset($_SESSION['error']);} ?><?php if(isset($_SESSION['great'])){ ?>
+                <div class="grup-input" onclick="$(this).hide()">
+                <div class="success-box"><?php echo $_SESSION['great']; ?></div>
+                </div>
+            <?php unset($_SESSION['great']);} ?>
             <div class="kotak-acara">
             <div id="calendar">
             </div> 

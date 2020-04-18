@@ -45,9 +45,10 @@ $(document).ready(function () {
                     load_folder();
                 }
             });
-
         } else {
-            alert("Enter folder name");
+            $("#folder_name").css("border", "1px solid #FF5252");
+            $("#error-folder_name").html("Nama belum diisi");
+            $("#error-folder_name").show();
         }
     });
     $(document).on("click", ".konfirmasi-box", function () {
@@ -113,20 +114,45 @@ $(document).ready(function () {
             }
         });
     });
-    $(document).on("submit", "#upload_form", function () {
-        $.ajax({
-            url: "upload.php",
-            method: "POST",
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (data) {
-                load_folder();
-                // alert(data);
-                // console.log("tes");
+    $(document).on("click", "#buat-folder", function(){
+            var pesan = $("#pesan").val();
+            var upload_file = $("#upload_file").val();
+            if(pesan==="" || !upload_file){
+                if(!pesan){
+                    $("#pesan").css("border", "1px solid #FF5252");
+                    $("#error-folder_name").html("Pesan belum diisi");
+                    $("#error-folder_name").show();
+                }else{
+                    $("#pesan").css("border", "none");
+                    $("#error-folder_name").hide();
+                }
+                if(!upload_file){
+                    $("#upload_file").css("border", "1px solid #FF5252");
+                    $("#error-upload_file").html("File belum diisi");
+                    $("#error-upload_file").show();
+                }else{
+                    $("#upload_file").css("border", "none");
+                    $("#error-upload_file").hide();
+                }
+                return false;
             }
-        });
+    });
+    $(document).on("submit", "#upload_form", function () {
+ 
+            $.ajax({
+                url: "upload.php",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    load_folder();
+                    // alert(data);
+                    // console.log("tes");
+                }
+            });
+
     });
     $(document).on("click", ".konfirmasi-box-remove", function () {
         var path = $(this).attr("id");

@@ -48,7 +48,13 @@
                     </div>
                 </div>
                 <div id="profil">
-                    <img src="./assets/images/account.png" alt="">
+                        <?php 
+                        if(empty($user['ProfilePicture'])){
+                        ?>
+                        <img src="./assets/images/account.png" alt="" srcset="">
+                        <?php }else{ ?>
+                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <?php }  ?>
                 </div>
             </div>
         </div>
@@ -76,7 +82,15 @@
                 <button id='create_folder'><i class="fas fa-folder-plus"></i> Buat Folder</button>
                 <?php } ?>
                 <button id="up"><i class="fas fa-angle-left"></i> Kembali</button>
-            </div>
+            </div> <?php if(isset($_SESSION['error'])){ ?>
+                <div class="grup-input" onclick="$(this).hide()">
+                <div class="error-box"><?php echo $_SESSION['error']; ?></div>
+                </div>
+            <?php unset($_SESSION['error']);} ?><?php if(isset($_SESSION['great'])){ ?>
+                <div class="grup-input" onclick="$(this).hide()">
+                <div class="success-box"><?php echo $_SESSION['great']; ?></div>
+                </div>
+            <?php unset($_SESSION['great']);} ?>
             <div class="kotak">
             </div>  
             <footer>

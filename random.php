@@ -25,5 +25,6 @@
         mysqli_query($conn, "UPDATE user SET SeatNumber='$seatNumber' WHERE NIM='$nim'");
         array_splice($arraySeatNumber, $index, 1);
     }
+    $_SESSION['great'] = "Aksi berhasil";
     header("Location: seating.php");
 ?>

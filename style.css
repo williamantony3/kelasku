@@ -104,7 +104,7 @@ nav{
     top: 130px;
 }
 #ucapan{
-    background-color: #3F51B5;
+    background-color: #303F9F;
     border-radius: 5px;
     box-shadow: 0.5px 0.5px 10px 1px #C5CAE9;
     padding: 20px;
@@ -190,6 +190,7 @@ nav{
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
+    align-items: center;
 }
 .foto-ts{
     margin-right: 10px;
@@ -322,12 +323,13 @@ th{
 input, textarea{
     width: 100%;
     background-color: #f9f9fb;
-    height: 30px;
+    height: 50px;
     border-radius: 5px;
     border: none;
     padding: 10px 20px;
     outline: none;
     font-family: PoppinsRegular;
+    box-sizing: border-box;
 }
 textarea{
     height: 100px;
@@ -481,4 +483,34 @@ table button{
 #juduldetailacara p{
     font-size: 14px;
     color: #ffffff;
+}
+.post-setting{
+    font-size: 12px; padding:10px 0;
+    font-family: PoppinsBold;
+}
+.post-setting a:hover{
+    color: #303F9F;
+}
+.error-msg{
+    color: #FF5252;
+    font-size: 12px;
+    text-align: left;
+}
+.error-box{
+    background-color: #FF5252;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 0 10px auto;
+    text-align: center;
+}
+.success-box{
+    background-color: #5eccd6;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 0 10px auto;
+    text-align: center;
 }
