@@ -8,7 +8,7 @@
     $queryUser = mysqli_query($conn, "SELECT * FROM user WHERE NIM='$nim'");
     $user = mysqli_fetch_assoc($queryUser);
     $queryPost = mysqli_query($conn, "SELECT * FROM post INNER JOIN user ON post.NIM = user.NIM ORDER BY ID DESC");
-    $queryAcara = mysqli_query($conn, "SELECT * FROM event WHERE Date >= CURRENT_TIMESTAMP");
+    $queryAcara = mysqli_query($conn, "SELECT * FROM event WHERE Date >= CURRENT_TIMESTAMP ORDER BY Date ASC");
     include "header.php"; 
 ?>
     <div id="konfirmasi">
@@ -99,6 +99,9 @@
             <a href="create_post.php"><button style="width: 100%;"><i class='fas fa-pencil-alt'></i> Buat Postingan</button></a>
             </div>
             <?php while($rowPost = mysqli_fetch_assoc($queryPost)){
+                $nimts = $rowPost['NIM'];
+                $rests = mysqli_query($conn, "SELECT * FROM user WHERE NIM='$nimts'");
+                $ts = mysqli_fetch_assoc($rests);
                 if($rowPost['Type'] == 0){
                     if(!file_exists($rowPost['Content'])){
                         continue;
@@ -108,11 +111,11 @@
                 <div class="yang-post">
                     <div class="foto-ts">
                         <?php 
-                        if(empty($user['ProfilePicture'])){
+                        if(empty($ts['ProfilePicture'])){
                         ?>
                         <img src="./assets/images/account.png" alt="" srcset="">
                         <?php }else{ ?>
-                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <img src="<?php echo $ts['ProfilePicture']; ?>" alt="" srcset="">
                         <?php }  ?>
                     </div>
                     <div class="yang-post-kanan">
@@ -139,11 +142,11 @@
                 <div class="yang-post">
                     <div class="foto-ts">
                         <?php 
-                        if(empty($user['ProfilePicture'])){
+                        if(empty($ts['ProfilePicture'])){
                         ?>
                         <img src="./assets/images/account.png" alt="" srcset="">
                         <?php }else{ ?>
-                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <img src="<?php echo $ts['ProfilePicture']; ?>" alt="" srcset="">
                         <?php }  ?>
                     </div>
                     <div class="yang-post-kanan">
@@ -170,11 +173,11 @@
                 <div class="yang-post">
                     <div class="foto-ts">
                         <?php 
-                        if(empty($user['ProfilePicture'])){
+                        if(empty($ts['ProfilePicture'])){
                         ?>
                         <img src="./assets/images/account.png" alt="" srcset="">
                         <?php }else{ ?>
-                        <img src="<?php echo $user['ProfilePicture']; ?>" alt="" srcset="">
+                        <img src="<?php echo $ts['ProfilePicture']; ?>" alt="" srcset="">
                         <?php }  ?>
                     </div>
                         <div class="yang-post-kanan">
